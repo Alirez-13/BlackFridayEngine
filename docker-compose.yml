@@ -1,0 +1,17 @@
+services:
+  blackfriday-api:
+    build:
+      context: .
+      dockerfile: src/BlackFriday.Api/Dockerfile
+    container_name: blackfriday-api
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Storage__DataDirectory=/app/data
+    volumes:
+      - sqlite_tenant_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  sqlite_tenant_data:
